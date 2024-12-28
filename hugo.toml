@@ -1,0 +1,38 @@
+title = "rashlight's site"
+baseURL = 'https://example.org'
+copyright = 'Copyright An Van Quoc 2024'
+languageCode = 'en-us'
+
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  relatedtext = "Related"
+  favicon = "/favicon.ico"
+
+  datesinlist = true
+  authorsinlist = true
+
+  nextprev = true
+  taglist = true
+  showrss = true
+
+  [params.author]
+    email = 'andtf2002@gmail.com'
+    name = 'An Van Quoc'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ['html', 'rss']
+  section = ['html', 'rss']
+  taxonomy = ['html']
+  term = ['html']
+
+[outputFormats]
+  [outputFormats.rss]
+    baseName = 'rss'
+
+  
