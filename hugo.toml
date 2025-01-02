@@ -3,6 +3,7 @@ baseURL = 'https://rashlight.com'
 copyright = 'Copyright An Van Quoc 2024'
 languageCode = 'en-us'
 
+enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
 [params]
@@ -19,6 +20,12 @@ disableKinds = ["taxonomy", "term"]
   [params.author]
     email = 'andtf2002@gmail.com'
     name = 'An Van Quoc'
+
+[sitemap]
+  changeFreq = ''
+  disable = false
+  filename = 'sitemap.xml'
+  priority = -1
 
 [markup]
   [markup.goldmark]

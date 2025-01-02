@@ -1,0 +1,5 @@
+User-Agent: *
+Crawl-delay: 3600000
+Visit-time: 0500-1100
+
+Sitemap: {{ printf "%s%s" .Site.BaseURL "sitemap.xml" }}

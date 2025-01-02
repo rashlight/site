@@ -1,0 +1,70 @@
+hr {
+  border-color: var(--pico-color);
+}
+
+.align-vcenter {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+}
+
+.align-hcenter {
+  display: flex;
+  flex-direction: row;
+  overflow: visible;
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.icon-avatar {
+  width: 7.5rem;
+  height: 7.5rem;
+  margin: 1rem 0 1rem 0;
+  clip-path: circle();
+}
+
+.icon-primary {
+  max-width: 48px;
+  max-height: 48px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+/* Light mode override */
+[data-theme="light"] {
+  :root:not([data-theme="dark"]) {
+    --pico-background-color: #fff7ee;
+  }
+
+  .icon-primary {
+    filter: none;
+  }
+}
+
+/* Dark mode override */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --pico-background-color: #0f1114;
+  }
+
+  .icon-primary {
+    filter: invert(100%);
+  }
+}
+
+/* Dark mode override, duplicate */
+[data-theme="dark"] {
+  :root:not([data-theme]) {
+    --pico-background-color: #0f1114;
+  }
+
+  .icon-primary {
+    filter: invert(100%);
+  }
+}
