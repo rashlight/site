@@ -1,0 +1,43 @@
+hr {
+  margin-top: 0px;
+  border-color: var(--pico-color);
+}
+
+body, div {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  height: 100vh;
+  height: 100dvh;
+  flex-direction: column;
+  overflow: auto;
+  padding: 0;
+}
+
+div {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px 0px;
+  align-items: center;
+}
+
+h1, h3 {
+  text-align: center;
+}
+
+.img-primary {
+  max-width: 48px;
+  max-height: 48px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.avatar {
+  width: 7.5rem;
+  height: 7.5rem;
+  margin: 0 0 1rem 0;
+  clip-path: circle();
+}

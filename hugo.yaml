@@ -1,0 +1,91 @@
+title: "rashlight's site"
+baseURL: 'https://rashlight.com'
+copyright: 'Copyright An Van Quoc 2024-2025'
+languageCode: 'en-us'
+
+enableEmoji: true
+enableRobotsTXT: true
+cleanDestinationDir: true
+minifyOutput: true
+
+params:
+  images:
+    - /img/default-og.jpg
+  author:
+    name: 'An Van Quoc'
+    alias: 'rashlight'
+    email: 'andtf2002@gmail.com'
+    slogan: 'code - cloud - computers'
+  paginate:
+    page: 10
+    projects: 15
+
+markup:
+  highlight:
+    style: doom-one2
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block:
+          - - \[
+            - \]
+          - - $$
+            - $$
+          inline:
+          - - \(
+            - \)
+          - - $  # use \\$ for actual $ character (only when math: true)
+            - $
+        enable: true
+    parser:
+      attribute:
+        title: true
+    renderer:
+      unsafe: true
+
+outputs:
+  home: ['html', 'rss']
+  section: ['html', 'rss']
+  taxonomy: ['html']
+  term: ['html']
+
+outputFormats:
+  rss:
+    baseName: 'rss'
+
+module:
+  hugoVersion:
+    extended: true
+    min: "0.146.0"
+  mounts:
+    - source: "assets"
+      target: "assets"
+    - source: "hugo_stats.json"
+      target: "assets/watching/hugo_stats.json"
+
+build:
+  buildStats:
+    enable: true
+
+privacy:
+  disqus:
+    disable: false
+  googleAnalytics:
+    disable:  false
+    respectDoNotTrack: true
+  instagram:
+    disable: false
+    simple: false
+  x:
+    disable: false
+    enableDNT: true
+    simple: false
+  vimeo:
+    disable: false
+    enableDNT: false
+    simple: false
+  youtube:
+    disable: false
+    privacyEnhanced: true
+  

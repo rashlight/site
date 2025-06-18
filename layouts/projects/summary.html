@@ -1,0 +1,17 @@
+<a class="no-underline" href="{{ .RelPermalink }}">
+  <div class="anchor-block">
+  {{ $thumbnailURL := "" }}
+  {{ with .Resources.Get .Params.thumbnail }}
+  {{ $thumbnailURL = .RelPermalink }}
+  {{ end }}
+  {{ if $thumbnailURL }} 
+  <img class="thumbnail-image" src="{{ $thumbnailURL }}" alt="" aria-hidden="true">
+  {{ else }}
+  <img class="thumbnail-image img-invertible" src="/img/thumbnail.svg" alt="" aria-hidden="true">
+  {{ end }}
+  <h3><strong>{{ .Title }}</strong></h3>
+  {{ if .Description }} 
+    <p>{{ .Description | plainify | truncate 100 }}</p>
+  {{ end }}
+  </div>
+</a>

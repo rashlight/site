@@ -1,0 +1,3 @@
+readingTime:
+  one: about one minute
+  other: about {{ .Count }} minutes

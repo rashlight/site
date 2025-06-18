@@ -1,0 +1,18 @@
+<a class="no-underline" href="{{ .RelPermalink }}">
+  <div class="anchor-block">
+    {{ $titleName := .Title }}
+    {{ if eq .Params.star true }}
+      {{ $titleName = printf "%s %s" $titleName (emojify ":star:")}}
+    {{ end }}
+    {{ if .Draft }}
+      {{ $titleName = printf "%s %s" $titleName (emojify ":pencil:")}}
+    {{ end }}
+    {{ partial "dualtitle.html" 
+    (dict 
+      "titleName" $titleName
+      "metaContent" (printf "%s" (.Date.Format "Jan 02, 2006"))
+    )
+    }}
+    <p>{{ partial "contentdesc.html" . }}</p>
+  </div>
+</a>

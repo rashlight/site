@@ -1,0 +1,461 @@
+/* 
+  Global stylesheets - Do not put Hugo layout specific styles here
+*/
+
+@use "pico/scss/pico" with (
+  $theme-color: "slate",
+  $enable-semantic-container: true,
+  $enable-classes: false,
+  $modules: (
+    // Theme
+    "themes/default": true,
+
+    // Layout
+    "layout/document": true,
+    "layout/landmarks": true,
+    "layout/container": false,
+    "layout/section": true,
+    "layout/grid": false,
+    "layout/overflow-auto": true,
+
+    // Content
+    "content/link": true,
+    "content/typography": true,
+    "content/embedded": true,
+    "content/button": true,
+    "content/table": true,
+    "content/code": true,
+    "content/figure": true,
+    "content/misc": true,
+
+    // Forms
+    "forms/basics": true,
+    "forms/checkbox-radio-switch": true,
+    "forms/input-color": false,
+    "forms/input-date": false,
+    "forms/input-file": false,
+    "forms/input-range": false,
+    "forms/input-search": false,
+
+    // Components
+    "components/accordion": true,
+    "components/card": false,
+    "components/dropdown": true,
+    "components/group": false,
+    "components/loading": false,
+    "components/modal": true,
+    "components/nav": false,
+    "components/progress": false,
+    "components/tooltip": true,
+
+    // Utilities
+    "utilities/accessibility": true,
+    "utilities/reduce-motion": true,
+  )
+);
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  header {
+    padding: var(--pico-typography-spacing-vertical) 0;
+
+    a {
+      text-decoration: none;
+    }
+
+    p {
+      margin-bottom: 0px;
+    }
+  }
+
+  main {
+    padding: var(--pico-typography-spacing-vertical) 0;
+  }
+}
+
+hr {
+  border-color: var(--pico-border-color);
+}
+
+footer {
+  @include flex-column;
+  align-items: center;
+  opacity: 75%;
+
+  p {
+    font-size: small;
+    margin-bottom: auto;
+  }
+
+  a {
+    margin-top: 0.1rem;
+  }
+
+  hr {
+    width: 100%;
+    opacity: 0.15;
+    margin: 0.7rem 0rem;
+  }
+}
+
+table {
+  display: block;
+  overflow: auto;
+}
+
+code {
+  color: unset;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.img-primary {
+  max-width: 36px;
+  max-height: 36px;
+  width: 2rem;
+  height: 2rem;
+}
+
+.img-git-footer {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.2rem;
+  opacity: 0.75;
+}
+
+.header-text-container {
+  @include flex-row;
+
+  a > h1 {
+    text-overflow: ellipsis;
+    margin: 0px 0px;
+  }
+}
+
+.header-text {
+  margin-right: 1rem;
+}
+
+.quicklinks-container-large {
+  display: none;
+  align-items: center;
+  flex-direction: row;
+  margin-left: auto;
+  margin-bottom: 0px;
+  gap: 10px;
+}
+
+.quicklinks-container {
+  @include flex-column;
+  position: relative;
+  width: -webkit-fit-content;
+  width: fit-content;
+  align-items: end;
+  flex-grow: 1;
+  flex-shrink: 0;
+  margin-bottom: 0px;
+  justify-content: flex-start;
+  z-index: 1;
+}
+
+.quicklinks-summary {
+  display: flex;
+  height: auto;
+  border: 1px solid var(--pico-secondary-background);
+  border-radius: 10px;
+  align-items: center;
+  margin-left: auto;
+  margin-bottom: 0px;
+  background-color: var(--pico-background-color);
+  padding: 0.33rem 1.4rem;
+  list-style: none;
+  cursor: pointer;
+
+  &::after,
+  img {
+    transform: rotate(0deg);
+    transition: transform var(--pico-transition);
+  }
+}
+
+.quicklinks-container[open] {
+  .quicklinks-summary {
+    margin-bottom: 0px;
+    border: 1px solid var(--pico-muted-color);
+
+    &::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      width: 100dvw;
+      height: 100vh;
+      height: 100dvh;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: -1; // behind the summary, but not main content
+      cursor: default;
+    }
+
+    &::after {
+      transform: rotate(180deg);
+    }
+
+    img {
+      transform: rotate(90deg);
+    }
+  }
+
+  .quicklinks-list {
+    position: absolute;
+    right: 0%;
+    background-color: var(--pico-background-color);
+    padding: 0;
+    border-radius: 15px;
+
+    li {
+      list-style: none;
+      padding: 0.33rem 1.25rem;
+      transition: background-color var(--pico-transition), box-shadow var(--pico-transition);
+
+      &:hover,
+      &:focus-within {
+        background-color: var(--pico-muted-border-color);
+      }
+
+      &:focus-within {
+        box-shadow: 0 0 0 var(--pico-outline-width) var(--pico-primary-focus);
+      }
+
+      a > span {
+        @include flex-column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        font-size: large;
+      }
+    }
+
+    .quicklinks-list-top {
+      padding-top: 0.66rem;
+    }
+  }
+}
+
+.dualtitle-text-container {
+  @include flex-row;
+  gap: 10px;
+
+  p {
+    font-size: medium;
+    margin-left: auto;
+  }
+}
+
+.links-container {
+  @include flex-column;
+  gap: 0.5rem;
+  overflow: visible;
+  background-color: var(--pico-background-color);
+}
+
+.anchor-block {
+  display: block;
+  border: 2px solid var(--pico-muted-color);
+  border-radius: 15px;
+  padding: 15px 20px;
+  margin-bottom: 1rem;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color var(--pico-transition);
+
+  h5 {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin-bottom: 0.2rem;
+  }
+
+  &:hover {
+    border-color: var(--pico-color);
+  }
+}
+
+.empty-post-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    font-size: large;
+    opacity: 0.8;
+  }
+}
+
+.fab-anchor {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  max-width: 128px;
+  max-height: 64px;
+  z-index: 2;
+}
+
+.pagination {
+  display: flex;
+  position: relative;
+  margin-bottom: var(--pico-spacing);
+}
+
+.pagination-prev,
+.pagination-next,
+.pagination-text {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  opacity: 0.75;
+}
+
+.pagination-prev {
+  left: 25%;
+}
+
+.pagination-text {
+  left: 50%;
+}
+
+.pagination-next {
+  left: 75%;
+}
+
+/* Accessibility */
+
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: 10px;
+  background-color: var(--pico-contrast-inverse);
+  z-index: 9;
+
+  &:focus {
+    top: 10px;
+  }
+}
+
+.scroll-to {
+  display: flex;
+  justify-content: center;
+  font-size: large;
+  margin-top: var(--pico-typography-spacing-vertical);
+}
+
+/* Pico CSS override options */
+
+:root,
+:host {
+  --pico-font-family-sans-serif: "Nunito Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, Arial, "Helvetica Neue",
+    system-ui, sans-serif;
+  --pico-font-family-monospace: SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", ui-monospace, monospace;
+}
+
+/* Mobile responsive */
+body {
+  padding: 0rem 0.75rem;
+}
+
+@media (min-width: 481px) {
+  body {
+    padding: 0 2.5rem;
+  }
+
+  .quicklinks-summary {
+    padding: 0.25rem 1.25rem;
+  }
+}
+
+/* Tablet responsive */
+@media (min-width: 769px) {
+  body {
+    padding: 0 5rem;
+  }
+
+  .fab-anchor {
+    max-width: 256px;
+    max-height: 128px;
+  }
+
+  .quicklinks-container-large {
+    display: flex;
+  }
+
+  .quicklinks-container {
+    display: none;
+  }
+
+  header {
+    p {
+      margin-top: 0.25rem;
+    }
+  }
+}
+
+/* Desktop responsive */
+@media (min-width: 1025px) {
+  body {
+    padding: 0 8rem;
+  }
+}
+
+@media (min-width: 1368px) {
+  body {
+    padding: 0 12rem;
+  }
+}
+
+/* Dark mode */
+@media screen and (prefers-color-scheme: dark) {
+  // :root:not([data-theme]),
+  // :host:not([data-theme]) {
+  // }
+
+  .img-primary,
+  .img-invertible {
+    filter: invert(100%);
+  }
+}
+
+/* Light mode (override) */
+[data-theme="light"] {
+  // :root:not([data-theme=dark]),
+  // :host:not([data-theme=dark]) {
+  // }
+
+  .img-primary,
+  .img-invertible {
+    filter: none;
+  }
+}
+
+/* Dark mode (override) */
+[data-theme="dark"] {
+  .img-primary,
+  .img-invertible {
+    filter: invert(100%);
+  }
+}

@@ -1,0 +1,3 @@
+<h{{ math.Min (add .Level 2) 6 }} class="heading-section" id="{{ .Anchor }}" {{- with .Attributes.class }} class="{{ . }}" {{- end }}>
+{{ .Text }}<span class="headings-space"> <a class="anchor-section"href="#{{ .Anchor }}">#</a></span>
+</h{{ .Level }}>

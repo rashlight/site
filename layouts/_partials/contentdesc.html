@@ -1,0 +1,9 @@
+{{ $contentDesc := "" }}
+{{ if .Description }}
+  {{ $contentDesc = .Description}}
+{{ else if .Content }}
+  {{ $contentDesc = .Content | plainify | truncate 150 }}
+{{ else }}
+  {{ $contentDesc = partial "titledesc.html" . }}
+{{ end }}
+{{ return $contentDesc }}

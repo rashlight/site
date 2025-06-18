@@ -1,0 +1,4 @@
+<label>
+  <input type="checkbox" {{ with .Get "id" }}id="{{ . }}"{{ end }} {{ with .Get "name" }}name="{{ . }}"{{ end }} {{ if .Get "checked" }}checked{{ end }}>
+  {{ .Get "name" }}
+</label>

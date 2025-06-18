@@ -1,0 +1,35 @@
+{{/* Parameters:
+   * type: type of admonition, one of: tips note question warning caution danger
+   * title: alternative title
+   * icon: alternative icon 
+   */}}
+
+{{ $type := .Get "type" | default "note" | lower }}
+{{ $title := .Get "title" }}
+{{ $icon := .Get "icon" }} 
+
+{{ $defaults := dict
+  "tips" (dict "title" "Tips" "icon" "/img/light-bulb-on.svg")
+  "note" (dict "title" "Note" "icon" "/img/info-circle.svg")
+  "question" (dict "title" "FAQ" "icon" "/img/chat-bubble-question.svg")
+  "warning" (dict "title" "Warning" "icon" "/img/warning-triangle.svg")
+  "caution" (dict "title" "Caution" "icon" "/img/warning-circle.svg")
+  "danger" (dict "title" "Danger" "icon" "/img/warning-square.svg")
+}}
+
+{{ $typeDefaults := index $defaults $type }}
+
+{{ with $typeDefaults }}
+  {{ $title = default (index . "title") $title }}
+  {{ $icon  = default (index . "icon") $icon }}
+{{ end }}
+
+<div class="admonition">
+  <div class="admonition-{{ $type }}">
+    <img class="admonition-icon" src="{{ $icon }}" alt="" aria-hidden="true"/>
+    <p class="admonition-text"><strong>{{ $title }}</strong></p>
+  </div>
+  <div class="admonition-content">
+    {{ .Inner | markdownify }}
+  </div>
+</div>

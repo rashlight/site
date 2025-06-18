@@ -1,0 +1,37 @@
+{{ define "title" }}{{ printf "%s's %s" .Site.Params.author.alias "site" }}{{ end }} 
+
+{{ define "stylesheets" }}
+  {{ partial "dartscss.html" (dict "path" "css/center.scss") }}
+{{ end }} 
+
+{{ define "body" }}
+<body>
+  <div>
+    <img class="avatar" src="/img/avatar.webp" alt="Avatar" fetchpriority="high"/>
+  </div>
+  <h1 class="text-center"><strong>{{ default "Unnamed" .Site.Params.author.name }}</strong></h1>
+  <h3 class="text-center">{{ default "Insert slogan here..." .Site.Params.author.slogan }}</h3>
+  <hr />
+  <div>
+    <a href="/about" data-tooltip="About" data-placement="bottom">
+      <img class="img-primary" src="/img/info-circle.svg" alt="About" />
+    </a>
+    <a href="/blog" data-tooltip="Blog" data-placement="bottom">
+      <img class="img-primary" src="/img/post.svg" alt="Blog" />
+    </a>
+    <a href="/projects" data-tooltip="Projects" data-placement="bottom">
+      <img class="img-primary" src="/img/code-brackets.svg" alt="Projects" />
+    </a>
+    <a href="https://github.com/rashlight" data-tooltip="Github" data-placement="bottom">
+      <img class="img-primary" src="/img/github.svg" alt="Github" />
+    </a>
+    <a href="https://linkedin.com/in/rashlight" data-tooltip="Linkedin" data-placement="bottom">
+      <img class="img-primary" src="/img/linkedin.svg" alt="Linkedin" />
+    </a>
+    <a href="mailto:{{ .Site.Params.author.email }}" data-tooltip="Contact" data-placement="bottom">
+      <img class="img-primary" src="/img/mail.svg" alt="Email" />
+    </a>
+  </div>
+  {{ partial "fab.html" . }}
+</body>
+{{ end }}

@@ -1,0 +1,25 @@
+<!-- Parameters:
+    .path: the path to the scss file (relative to assets folder)
+-->
+{{ $cssOpts := dict 
+  "transpiler" "dartsass" 
+  "enableSourceMap" (not hugo.IsProduction)
+  "silenceDeprecations" (slice "global-builtin" "mixed-decls" "color-functions") 
+}}
+{{ $target := resources.Get .path }}
+{{ $scratch := newScratch }}
+{{ if hugo.IsProduction }}
+{{ $scratch.Set "targetStylesheet" ($target | toCSS $cssOpts | postCSS | fingerprint | resources.PostProcess) }}
+{{ else }}
+{{ $scratch.Set "targetStylesheet" ($target | toCSS $cssOpts) }}
+{{ end }}
+
+{{ $targetStylesheet := $scratch.Get "targetStylesheet" }}
+{{ if (.inlineCSS | default false) }}
+{{/* "at-rule or selector expected" error is linter false positive, ignore */}}
+<style>{{ $targetStylesheet.Content | safeCSS }}</style> 
+{{ else if (.preloadStyle | default false) }}
+<link rel="preload" href="{{ $targetStylesheet.RelPermalink }}" as="style" onload="this.rel='stylesheet';this.onload=null" crossorigin>
+{{ else }}
+<link rel="stylesheet" href="{{ $targetStylesheet.RelPermalink }}" />
+{{ end }}

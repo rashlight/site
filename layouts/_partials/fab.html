@@ -1,0 +1,9 @@
+{{ if .Params.fab.img  }}
+  {{ if .Params.fab.url }}
+    <a class="fab-anchor" href='{{ .Params.fab.url }}'>
+      <img src='{{ .Params.fab.img }}' alt='{{ .Params.fab.alt | default "floating action button" }}'/>
+    </a>
+  {{ else }}
+    <img class="fab-anchor" src='{{ .Params.fab.img }}' alt='{{ .Params.fab.alt | default "floating action button" }}'/>
+  {{ end }}
+{{ end }}

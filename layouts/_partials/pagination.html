@@ -1,0 +1,17 @@
+{{/* Overrides templates/_partials/pagination.html */}}
+{{ $pagination_param := .paginate }}
+{{ if gt $pagination_param.TotalPages 1 }}
+<div class="pagination">
+  <div class="pagination-prev">
+    {{ if $pagination_param.HasPrev }}
+      <a href="{{ $pagination_param.Prev.URL }}">< Previous</a>
+    {{ end }}
+  </div>
+  <span class="pagination-text"><strong>{{ printf "%d / %d" $pagination_param.PageNumber $pagination_param.TotalPages }}</strong></span>
+  <div class="pagination-next">
+    {{ if $pagination_param.HasNext }}
+      <a href="{{ $pagination_param.Next.URL }}">Next ></a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

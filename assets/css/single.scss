@@ -1,0 +1,205 @@
+@use "pico/scss/colors" as *;
+
+:root {
+  --tips-color: #{$green-500};
+  --note-color: #{$azure-550};
+  --question-color: #{$blue-550};
+  --warning-color: #{$amber-500};
+  --caution-color: #{$orange-500};
+  --danger-color: #{$red-500};
+}
+
+body > main {
+  border-top: 5px solid var(--pico-muted-color);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.page-title {
+  margin-top: 0px;
+  margin-bottom: 0.33rem;
+}
+
+.info-container {
+  p {
+    opacity: 0.8;
+    font-size: large;
+    margin-bottom: 0.33rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.navigation-container {
+  .previous .anchor-block,
+  .next .anchor-block {
+    margin-bottom: 0px;
+  }
+}
+
+.thumbnail-figure {
+  margin-bottom: 0.8rem;
+
+  figcaption {
+    padding-bottom: 0px;
+  }
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: 8rem;
+  overflow: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+  margin-bottom: 0px;
+}
+
+.anchor-section {
+  display: none;
+}
+
+.heading-section:hover .anchor-section, .headings-space {
+  display: inline;
+  user-select: none;
+}
+
+.code-block {
+  margin-top: 15px;
+  position: relative;
+  overflow: visible;
+}
+
+.code-lang {
+  font-size: inherit;
+}
+
+.code-copy-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.code-copy {
+  position: absolute;
+  background-color: var(--pico-background-color);
+  padding: 0px 10px;
+  border-radius: 10px;
+  top: -15px;
+  right: 15px;
+  z-index: 1;
+}
+
+.code-copy-anchor {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.admonition {
+  border: 3px solid var(--pico-muted-border-color);
+  border-radius: 3px;
+  margin-bottom: var(--pico-typography-spacing-vertical);
+}
+
+.admonition-tips,
+.admonition-note,
+.admonition-question,
+.admonition-warning,
+.admonition-caution,
+.admonition-danger {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 0.4rem 10px;
+}
+
+.admonition-tips {
+  background-color: var(--tips-color);
+}
+.admonition-note {
+  background-color: var(--note-color);
+}
+.admonition-question {
+  background-color: var(--question-color);
+}
+.admonition-warning {
+  background-color: var(--warning-color);
+}
+.admonition-caution {
+  background-color: var(--caution-color);
+}
+.admonition-danger {
+  background-color: var(--danger-color);
+}
+
+.admonition-content {
+  padding: 10px 15px;
+
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+.admonition-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  max-width: 36px;
+  max-height: 36px;
+  filter: invert(100%);
+}
+
+.admonition-text {
+  margin: 0px 0px;
+  color: #ffffff;
+}
+
+.caption {
+  display: flex;
+  justify-content: center;
+  font-size: small;
+  opacity: 0.8;
+  gap: 4px;
+  margin-bottom: 0px;
+}
+
+.MathJax {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  body > main {
+    border-left: 1px solid var(--pico-muted-border-color);
+    border-right: 1px solid var(--pico-muted-border-color);
+    padding-left: 0.65rem;
+    padding-right: 0.65rem; 
+  }
+}
+
+/* Dark mode */
+@media screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]),
+  :host:not([data-theme]) {
+    --tips-color: #{$green-600};
+    --note-color: #{$azure-600};
+    --question-color: #{$blue-600};
+    --warning-color: #{$amber-600};
+    --caution-color: #{$orange-600};
+    --danger-color: #{$red-500};
+  }
+}
+
+/* Dark mode (override) */
+[data-theme="dark"] {
+  --tips-color: #{$green-600};
+  --note-color: #{$azure-600};
+  --question-color: #{$blue-600};
+  --warning-color: #{$amber-600};
+  --caution-color: #{$orange-600};
+  --danger-color: #{$red-500};
+}

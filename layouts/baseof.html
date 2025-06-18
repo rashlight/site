@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en{{ end }}">
+  <head>
+    {{ block "storevars" . }}{{ end }} {{/* .Store.Set goes here */}}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    {{ block "metadata" . }}
+      {{ $canonicalLink := .Permalink }}
+      <link rel="canonical" href="{{ $canonicalLink }}"/>
+      {{ .Scratch.Set "pageTitle" (partial "titlesuffix.html" .) }}
+      {{ if and .Title (not (in (slice "home" "section" "taxonomy" "term") .Kind)) }}
+        {{ .Scratch.Set "pageTitle" (printf "%s | %s" .Title (.Scratch.Get "pageTitle")) }}
+      {{ end }}
+      <title>{{ block "title" . }}{{ .Scratch.Get "pageTitle" }}{{ end }}</title>    
+      {{ $description := (partial "contentdesc.html" .) }}
+      <meta name="description" content="{{ $description }}" />
+      {{ block "nextprev" . }}{{ end }} {{/* Next / Previous link tags */}}
+      {{ partial "opengraph.html" . }}
+      <link rel="icon" href="/favicon.ico">
+    {{ end }}
+    {{ partial "dartscss.html" (dict "path" "css/fonts.scss" "preloadStyle" true) }}
+    {{/* Prevent FOUC theme flashing */}}
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem("theme") ?? (matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light")
+    </script>
+    {{ block "basesheets" . }} {{/* CSS Framework goes here */}}
+      {{ partial "dartscss.html" (dict "path" "css/base.scss") }} 
+    {{ end }}
+    {{ block "stylesheets" . }} {{/* CSS goes here */}}
+      {{ partial "dartscss.html" (dict "path" "css/single.scss") }}
+    {{ end }}
+    {{ partial "scriptjs" (dict "path" "js/theme.js" "defer" true) }}
+    {{ block "scripts" . }}{{ end }} {{/* JS goes here */}}
+    {{ if .Params.math }} {{/* add math: true in page frontmatter or config */}}
+      {{ partial "scriptjs" (dict "path" "js/math.js" "defer" true) }}
+      <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" integrity="sha384-KKWa9jJ1MZvssLeOoXG6FiOAZfAgmzsIIfw8BXwI9+kYm0lPCbC6yTQPBC00F1/L" crossorigin="anonymous"></script>
+    {{ end }}
+    <noscript>
+      {{ partial "dartscss.html" (dict "path" "css/fonts.scss") }}
+      <style>.depend-js{display: none;}</style>
+    </noscript>
+  </head>
+
+  {{ block "body" . }}
+    <body>
+      <main id="main-content">Nothing here. Maybe check back soon?</main>
+    </body>
+  {{ end }}
+</html>

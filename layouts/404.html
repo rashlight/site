@@ -1,11 +1,20 @@
-{{ define "main" }}
-<main class="container-fluid align-vcenter">
-  <div>
-    <h1 class="text-center">404</h1>
-    <h3 class="text-center">Not Found.</h3>
-    <div class="depend-js align-hcenter">
-      <button class="outline contrast" onclick="history.back()">← Return to previous page</button>
-    </div>
-  </div>
-</main>
+{{ define "basesheets" }}
+{{ partial "dartscss.html" (dict "path" "css/404.scss") }}
+{{ end }}
+
+{{ define "metadata" }}
+<meta name="robots" content="noindex,nofollow">
+<title>404 Not Found</title>
+{{ end }}
+
+{{ define "stylesheets" }}
+{{ partial "dartscss.html" (dict "path" "css/404.scss" "inlineCSS" true) }}
+{{ end }}
+
+{{ define "body" }}
+<body>
+  <h1>404</h1>
+    <h3>Not Found.</h3>
+    <a class="depend-js" href="#" onclick="history.back()">← Return to previous page</a>
+</body>
 {{ end }}

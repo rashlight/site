@@ -1,0 +1,36 @@
+{{ define "nextprev" }}
+  {{ $paginate := .Paginate .Pages (default 10 .Site.Params.paginate.page) }}
+  {{ if $paginate.HasPrev }}
+    <link rel="prev" href="{{ $paginate.Prev.URL }}">
+  {{ end }}
+  {{ if $paginate.HasNext }}
+    <link rel="next" href="{{ $paginate.Next.URL }}">
+  {{ end }}
+{{ end }}
+
+{{ define "stylesheets" }} 
+  {{ partial "dartscss" (dict "path" "css/list.scss") }} 
+{{ end }} 
+
+{{ define "body" }}
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  {{ partial "header.html" . }}
+  <main id="main-content">
+  {{ $paginate := .Paginate .Pages (default 10 .Site.Params.paginate.page) }}
+  {{ $pages := $paginate.Pages }}
+  {{ if $pages }}
+    {{ range $pages }}
+      {{ .Render "summary" }}
+    {{ end }}
+  </main>
+  {{ partial "pagination.html" (dict "paginate" $paginate) }} 
+  {{ else }}
+    <div class="empty-post-container">
+      <span><em>Nothing here. Maybe check back soon?</em></span>
+    </div>
+  </main>
+  {{ end }}
+  {{ partial "footer.html" . }}
+</body>
+{{ end }}

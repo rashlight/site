@@ -1,0 +1,56 @@
+{{- $authorName := "" }}
+{{- with site.Params.author }}
+  {{- if reflect.IsMap . }}
+    {{- with .name }}
+      {{- $authorName = . }}
+    {{- end }}
+  {{- else }}
+    {{- $authorName  = . }}
+  {{- end }}
+{{- end }}
+
+{{- $pctx := . }}
+{{- if .IsHome }}{{ $pctx = .Site }}{{ end }}
+{{- $pages := slice }}
+{{- if or $.IsHome $.IsSection }}
+{{- $pages = $pctx.RegularPages }}
+{{- else }}
+{{- $pages = $pctx.Pages }}
+{{- end }}
+{{- $limit := .Site.Config.Services.RSS.Limit }}
+{{- if ge $limit 1 }}
+{{- $pages = $pages | first $limit }}
+{{- end }}
+
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ partial "titlesuffix.html" . }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>Recent content on {{ partial "titlesuffix.html" . }}</description>
+    <language>{{ site.Language.LanguageCode }}</language>
+    {{ with .Site.Copyright }}
+      <copyright>{{ . }}</copyright>
+    {{ end }}
+    {{ if not .Date.IsZero }}
+      <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{ end }}
+    <docs>https://www.rssboard.org/rss-specification</docs>
+    <ttl>180</ttl>
+    {{- with .OutputFormats.Get "RSS" }}
+      {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end }}
+    {{- $blogPages := where .Site.RegularPages "Section" "blog" }}
+    {{- $filteredPages := where $blogPages ".Params.excludeFromRSS" "!=" true }}
+    {{- range first 10 (sort $filteredPages "Date" "desc") }}
+      <item>
+        <title>{{ .Title }}</title>
+        <link>{{ .Permalink }}</link>
+        <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+        <author>{{ with $authorName }}{{ . }}{{ end }}</author>
+        <guid>{{ .Permalink }}</guid>
+        <description>{{ with .Description }}{{ printf "<p>%s</p>" . | transform.XMLEscape | safeHTML }}{{ else }}{{ .Summary | transform.XMLEscape | safeHTML }}{{ end }}</description>
+      </item>
+    {{- end }}
+  </channel>
+</rss>

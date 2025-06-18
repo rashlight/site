@@ -1,2 +1,10 @@
+# Nodejs
+node_modules/
+package-lock.json
+
+# Hugo
 public/
+resources/
+content/private/
 .hugo_build.lock
+hugo_stats.json

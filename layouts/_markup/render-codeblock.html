@@ -1,0 +1,9 @@
+<div class="code-block">
+  <div class="code-copy">
+    <a class="code-copy-anchor" onclick="copyToClipboard(this)">
+      <span class="code-lang">{{ .Type }}</span>
+      <img class="code-copy-icon img-invertible depend-js" src="/img/copy.svg" alt="Copy to clipboard" />
+    </a>
+  </div>
+  {{ transform.Highlight .Inner .Type .Options }}
+</div>

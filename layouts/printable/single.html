@@ -1,0 +1,45 @@
+{{ define "scripts" }}
+  {{ partial "scriptjs" (dict "path" "js/clipboard.js" "defer" true) }}
+{{ end }}
+
+{{ define "body" }}
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <main id="main-content">
+    {{ if .Params.thumbnail.url }}
+    <figure class="thumbnail-figure">
+      <img class="thumbnail-image" src="{{ .Params.thumbnail.url }}" alt="Page thumbnail"/>
+      {{ with .Params.thumbnail.caption }}
+      <figcaption class="caption">{{ . | markdownify }}</figcaption>
+      {{ end }}
+    </figure>
+    {{ end }}
+    <h3 class="page-title"><strong>{{ .Title }}</strong></h3>
+    <div class="info-container">
+        <p>
+          {{ if .Params.readingTime | default true }}
+          <i>{{ i18n "readingTime" (dict "Count" .ReadingTime) }}</i>{{ if not .Date.IsZero }} | <i>{{ .Date.Format "2 Jan 2006" }}{{ end }}</i>
+          {{ end }}
+          {{ if .Params.tags }} | {{ range .Params.tags }}
+          <a href="{{ printf "/tags/%s/" . | urlize | relURL }}"><i>#{{ . }}</i></a>{{ " " }}
+          {{ end }}{{ end }}
+        </p>
+        {{ with .Params.music }} 
+          {{ if and .url .title }}
+          <p>♫ <a href="{{ .url }}"><i>{{ .title }}</i></a></p>
+          {{ else if .title }}
+          <p>♫ <i>{{ .title }}</i></p>
+          {{ end }} 
+        {{ end }}
+    </div>
+    <hr />
+    {{ if .Content }}
+      {{ .Content }}
+    {{ else }}
+    <div class="empty-post-container">
+      <p><i>Nothing here. Maybe check back soon?</i></p>
+    </div>
+    {{ end }}
+  </main>
+</body>
+{{ end }}

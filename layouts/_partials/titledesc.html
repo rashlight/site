@@ -1,0 +1,15 @@
+{{ $titleDescription := "" }}
+
+{{ if .Params.descriptionAlt }}
+  {{ $titleDescription = .Params.descriptionAlt }}
+{{ else if .Store.Get "descriptionAlt" }}
+  {{ $titleDescription = .Store.Get "descriptionAlt" }}
+{{ else if and .Parent .Parent.Params.descriptionAlt }}
+  {{ $titleDescription = .Parent.Params.descriptionAlt }}
+{{ else if and .FirstSection .FirstSection.Params.descriptionAlt }}
+  {{ $titleDescription = .FirstSection.Params.descriptionAlt }}
+{{ else if .Site.Params.author.slogan }}
+  {{ $titleDescription = .Site.Params.author.slogan }}
+{{ end }}
+
+{{ return $titleDescription }}

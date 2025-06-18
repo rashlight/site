@@ -1,0 +1,7 @@
+<header id="header">
+  <div class="header-text-container">
+    <a class="header-text" href="{{ if and .Parent .Parent.IsHome }}/{{ else }}{{ .FirstSection.RelPermalink }}{{ end }}"><h1><strong>{{ partial "titlesuffix.html" . }}</strong></h1></a>
+    {{ partial "quicklinks.html" . }}
+  </div>
+  <p><i>{{ partial "titledesc.html" . }}</i></p>
+</header>

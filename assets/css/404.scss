@@ -1,0 +1,71 @@
+// Colors wonderfully handpicked from Pico CSS (picocss.com)
+@mixin dark-theme {
+  color: #c2c7d0;
+  background-color: rgb(19, 22.5, 30.5);
+}
+
+@mixin light-theme {
+  color: #373c44;
+  background-color: #fff;
+}
+
+:root,
+:host {
+  font-family: "Nunito Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, Arial, "Helvetica Neue", system-ui,
+    sans-serif;
+}
+
+body,
+div {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 0;
+  margin: 0;
+}
+
+h1,
+h3,
+a {
+  display: flex;
+  text-align: center;
+  margin: 0;
+}
+
+h1 {
+  font-size: 5rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+a {
+  text-decoration: none;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  padding: 1rem;
+  color: inherit;
+  border: 1px solid;
+  border-radius: 12px;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root,
+  :host {
+    @include dark-theme;
+  }
+}
+
+/* Light mode (override) */
+[data-theme="light"] {
+  @include light-theme;
+}
+
+/* Dark mode (override) */
+[data-theme="dark"] {
+  @include dark-theme;
+}

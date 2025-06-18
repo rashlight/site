@@ -1,0 +1,26 @@
+{{ define "storevars" }}
+{{ .Store.Set "typeAlt" ( printf "tag search" ) }}
+{{ .Store.Set "descriptionAlt" ( printf "listed alphabetically" ) }}
+{{ end }}
+
+{{ define "stylesheets" }} 
+{{ partial "dartscss" (dict "path" "css/taxonomy.scss") }} 
+{{ end }} 
+
+{{ define "body" }}
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  {{ partial "header.html" . }}
+  <main id="main-content">
+  {{ range sort .Pages "Title" "asc" }} 
+    {{ .Render "summary-taxonomy" }}
+  {{ else }}
+    <div class="empty-post-container">
+      <span><em>Nothing here. Maybe check back soon?</em></span>
+    </div>
+  {{ end }} 
+  </main>
+  {{ partial "scrollto.html" }}
+  {{ partial "footer.html" . }}
+</body>
+{{ end }}

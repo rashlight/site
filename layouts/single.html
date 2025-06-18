@@ -1,0 +1,70 @@
+{{ define "nextprev" }}
+  {{ if .Params.nextPrev | default true}}
+    {{ with .PrevInSection }}
+      <link rel="prev" href="{{ .RelPermalink }}">
+    {{ end }}
+    {{ with .NextInSection }}
+      <link rel="next" href="{{ .RelPermalink }}">
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ define "scripts" }}
+  {{ partial "scriptjs" (dict "path" "js/clipboard.js" "defer" true) }}
+{{ end }}
+
+{{ define "body" }}
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  {{ partial "header.html" . }}
+  <main id="main-content">
+    {{ if .Params.thumbnail.url }}
+      <figure class="thumbnail-figure">
+        <img class="thumbnail-image" src="{{ .Params.thumbnail.url }}" alt="Page thumbnail"/>
+        {{ with .Params.thumbnail.caption }}
+        <figcaption class="caption">{{ . | markdownify }}</figcaption>
+        {{ end }}
+      </figure>
+    {{ end }}
+    <h3 class="page-title"><strong>{{ .Title }}</strong></h3>
+    <div class="info-container">
+      <p>
+        {{ if .Params.readingTime | default true }}
+        <i>{{ i18n "readingTime" (dict "Count" .ReadingTime) }}</i>{{ if not .Date.IsZero }} | <i>{{ .Date.Format "Jan 02, 2006" }}{{ end }}</i>
+        {{ end }}
+        {{ if .Params.tags }} | {{ range .Params.tags }}
+        <a href="{{ printf "/tags/%s/" . | urlize | relURL }}"><i>#{{ . }}</i></a>{{ " " }}
+        {{ end }}{{ end }}
+      </p>
+      {{ with .Params.music }} 
+        {{ if and .url .title }}
+          <p>♫ <a href="{{ .url }}"><i>{{ .title }}</i></a></p>
+        {{ else if .title }}
+          <p>♫ <i>{{ .title }}</i></p>
+        {{ end }} 
+      {{ end }}
+    </div>
+    <hr />
+    {{ if .Content }}
+      {{ .Content }}
+    {{ else }}
+    <div class="empty-post-container">
+      <span><em>Nothing here. Maybe check back soon?</em></span>
+    </div>
+    {{ end }}
+  </main>
+  {{ if .Params.nextprev | default true }}
+  <div class="navigation-container grid">
+    {{ with .PrevInSection }}
+      <a class="previous no-underline" href="{{ .RelPermalink }}"><div class="anchor-block"><span>Previous: {{.Title}}</span></div></a>
+    {{ end }} {{ with .NextInSection }}
+      <a class="next no-underline" href="{{ .RelPermalink }}"><div class="anchor-block"><span>Next: {{.Title}}</span></div></a>
+    {{ end }}
+  </div>
+  {{ end }}
+  {{ if gt .ReadingTime 1 }}
+    {{ partial "scrollto.html" }}
+  {{ end }}
+  {{ partial "footer.html" . }}
+</body>
+{{ end }}

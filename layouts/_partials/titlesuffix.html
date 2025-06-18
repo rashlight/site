@@ -1,0 +1,17 @@
+{{ $typeName := "" }}
+{{ if .Params.typeAlt }}
+  {{ $typeName = .Params.typeAlt }}
+{{ else if .Store.Get "typeAlt" }}
+  {{ $typeName = .Store.Get "typeAlt" }}
+{{ else if and .Parent .Parent.Params.typeAlt }}
+  {{ $typeName = .Parent.Params.typeAlt }}
+{{ else if and .FirstSection (.FirstSection.Store.Get "typeAlt") }}
+  {{ $typeName = .FirstSection.Store.Get "typeAlt" }}
+{{ else if and .Type (ne .Type "page") }}
+  {{ $typeName = .Type }}
+{{ else }}
+  {{ $typeName = "site" }}
+{{ end }}
+
+{{ $displayTypeName := printf "%s's %s" .Site.Params.author.alias $typeName }}
+{{ return $displayTypeName }}
