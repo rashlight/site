@@ -338,6 +338,14 @@ code {
   margin-bottom: var(--pico-spacing);
 }
 
+.pagination-end {
+  display: flex;
+  font-size: 1rem;
+  font-family: var(--pico-font-family-monospace);
+  align-items: center;
+  justify-content: center;
+}
+
 .pagination-prev,
 .pagination-next,
 .pagination-text {

@@ -66,10 +66,10 @@ Modifying the registry can cause problems if not done carefully.
 ## Install
 
 1. Open `regedit.exe`, navigate to `HKEY_CLASSES_ROOT\*\`. 
-2. Right-click on the `shell` key (or folder) -> Key, name it `SendWithKDEConnect`. **Select that key**.
+2. Create a new key by right-click on the `shell` key (folder) -> Key, name it `SendWithKDEConnect`. **Select that key**.
 3. Change the `(Default)` value to "Send to KDE Connect" or any message you want.
-4. **(Optional)** Create a new String Value named `Icon` and set it to `C:\Program Files\KDE Connect\icon.ico`
-5. Create a new key inside `SendWithKDEConnect` named `command`. Set the `(Default)` value to:
+4. Create a new String Value named `Icon` and set it to `C:\Program Files\KDE Connect\icon.ico` (Optional)
+5. Create a new key on `SendWithKDEConnect` named `command`. Set the `(Default)` value to:
 
 ```plaintext
 powershell.exe -WindowStyle Hidden -Command "& \"$env:ProgramFiles\\KDE Connect\\bin\\kdeconnect-cli.exe\" -d $((& \"$env:ProgramFiles\\KDE Connect\\bin\\kdeconnect-cli.exe\" -a) -split \"`r`n\" -replace \" \(.*\)|- |:\", \"\" | ForEach-Object { $parts = $_ -split \" +\", 2; [PSCustomObject]@{Name=$parts[0];\"Device ID\"=$parts[1]} } | Out-GridView -Title \"Select a device for %1\" -OutputMode Single).\"Device ID\" --share \"%1\""
@@ -85,7 +85,7 @@ Open `regedit.exe` again, navigate to `HKEY_CLASSES_ROOT\*\shell\`. Right-click 
 
 # Ending notes
 
-For brevity, below is the command to type in your terminal for similar functionality to the context menu. The purpose of this one-liner is to removes the beginning dash, double-dot and "(paired and reachable)" text, renames the columns and open up a dialog, then sends files according to parameters.
+For elaboration, below is `powershell` version of command to type in your terminal to have functionality to the context menu. This one-liner removes the beginning dash, double-dot and "(paired and reachable)" text, renames the columns and open up a dialog, then sends files according to parameters.
 
 ```powershell
 (& "$env:ProgramFiles\KDE Connect\bin\kdeconnect-cli.exe" 
@@ -99,4 +99,4 @@ For brevity, below is the command to type in your terminal for similar functiona
 ```
 If no suitable device is found, then it will prints: `Couldn't find device with id "--share"`
 
-Finally, seems that some command-line flag that does not get integrated in the GUI. Maybe that's for something else?
+On further examination, it seems that some command-line flag that does not get integrated in the main user interface. Maybe that's experimental for now?

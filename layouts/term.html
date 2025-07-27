@@ -18,6 +18,11 @@
       {{ .Render "summary" }}
     {{ end }}
   </main>
+  {{ if eq $paginate.PageNumber $paginate.TotalPages }}
+  <div class="pagination-end">
+    <p>----- end of list -----</p>
+  </div>
+  {{ end }}
   {{ partial "pagination.html" (dict "paginate" $paginate) }} 
   {{ else }}
     <div class="empty-post-container">
