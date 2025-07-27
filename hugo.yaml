@@ -1,7 +1,7 @@
 title: "rashlight's site"
 baseURL: 'https://rashlight.com'
 copyright: 'Copyright An Van Quoc 2024-2025'
-languageCode: 'en-us'
+languageCode: 'en'
 
 enableEmoji: true
 enableRobotsTXT: true
@@ -10,7 +10,7 @@ minifyOutput: true
 
 params:
   images:
-    - /img/default-og.jpg
+    - /img/og-default.jpg
   author:
     name: 'An Van Quoc'
     alias: 'rashlight'
@@ -19,6 +19,7 @@ params:
   paginate:
     page: 10
     projects: 15
+  repo: 'https://github.com/rashlight/site'
 
 markup:
   highlight:

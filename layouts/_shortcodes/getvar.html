@@ -1,0 +1,2 @@
+{{ $vars := .Page.Scratch.Get "pageSpecificVariables" | default dict }}
+{{ index $vars (.Get 0) | default (.Get 1) }}

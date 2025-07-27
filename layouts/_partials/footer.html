@@ -3,29 +3,33 @@
   <p>
     built with <a href="/credits#powered-by">technologies</a>
   </p>
-  
-  {{ $branchHash := "" }}
-  {{ if fileExists ".git/HEAD" }}
-    {{ $branchName := readFile ".git/HEAD" }}
-    {{ if strings.HasPrefix $branchName "ref:" }}
-      {{ $branchNamePath := (printf "%s%s" ".git/" ((index (split $branchName " ") 1) | chomp))}}
-      {{ if fileExists $branchNamePath }}
-        {{ $branchHash = substr (readFile $branchNamePath) -8 }}
-      {{ end }}
-    {{ else }}
-      {{ $branchHash = substr $branchName -8 }}
-    {{ end }}
-  {{ end }}
 
-  {{ if $branchHash }}
-    <p>
-      <a href="https://github.com/rashlight/site">
-        <img class="img-invertible img-git-footer" src="/img/git-commit.svg" alt="Git branch icon" />{{ $branchHash }}
-      </a>
-    </p>
-  {{ else }}
-    <p>
-      View the <a href="https://github.com/rashlight/site"> source code</a>.
-    </p>
+  {{ $repoLink := .Site.Params.repo }}
+  {{ if $repoLink }}
+    {{ $branchHash := "" }}
+    {{ if fileExists ".git/HEAD" }}
+      {{ $branchName := readFile ".git/HEAD" }}
+      {{ if strings.HasPrefix $branchName "ref:" }}
+        {{ $branchNamePath := (printf "%s%s" ".git/" ((index (split $branchName " ") 1) | chomp))}}
+        {{ if fileExists $branchNamePath }}
+          {{ $branchHash = substr (readFile $branchNamePath) -8 }}
+        {{ end }}
+      {{ else }}
+        {{/* detached HEAD */}}
+        {{ $branchHash = substr $branchName -8 }}
+      {{ end }}
+    {{ end }}
+
+    {{ if $branchHash }}
+      <p>
+        <a href="{{ $repoLink }}">
+          <img class="img-invertible img-git-footer" src="/img/git-commit.svg" alt="Git branch icon" />{{ $branchHash }}
+        </a>
+      </p>
+    {{ else }}
+      <p>
+        View the <a href="{{ $repoLink }}"> source code</a>.
+      </p>
+    {{ end }}
   {{ end }}
 </footer>

@@ -63,13 +63,15 @@ body > main {
   display: none;
 }
 
-.heading-section:hover .anchor-section, .headings-space {
+.heading-section:hover .anchor-section,
+.headings-space {
   display: inline;
+  -webkit-user-select: none; /* Safari */
   user-select: none;
 }
 
 .code-block {
-  margin-top: 15px;
+  margin: 15px 0px;
   position: relative;
   overflow: visible;
 }
@@ -98,6 +100,34 @@ body > main {
   text-decoration: none;
 }
 
+.cli-block {
+  border: 3px solid var(--pico-muted-border-color);
+  border-radius: 10px;
+
+  .cli-output {
+    display: block;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  pre,
+  p {
+    margin: 0px;
+  }
+}
+
+.ident-normal {
+  color: var(--note-color);
+}
+
+.ident-danger {
+  color: var(--danger-color);
+}
+
 .admonition {
   border: 3px solid var(--pico-muted-border-color);
   border-radius: 3px;
@@ -114,7 +144,7 @@ body > main {
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  padding: 0.4rem 10px;
+  padding: 0.35rem 0.7rem;
 }
 
 .admonition-tips {
@@ -137,10 +167,10 @@ body > main {
 }
 
 .admonition-content {
-  padding: 10px 15px;
+  padding: 10px 0.75rem;
 
-  p {
-    margin-bottom: 0px;
+  span {
+    font-size: 0.9rem;
   }
 }
 
@@ -177,7 +207,7 @@ body > main {
     border-left: 1px solid var(--pico-muted-border-color);
     border-right: 1px solid var(--pico-muted-border-color);
     padding-left: 0.65rem;
-    padding-right: 0.65rem; 
+    padding-right: 0.65rem;
   }
 }
 

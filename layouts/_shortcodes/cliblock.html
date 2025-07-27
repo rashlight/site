@@ -1,0 +1,24 @@
+{{ $command := .Get "command" }}
+{{ $commandType := .Get "commandType" | default "shell" }}
+{{ $commandOptions := .Get "commandOptions" }}
+{{ $ident := .Get "ident" }}
+{{ $identDanger := .Get "identDanger" | default false }}
+{{ $outputType := .Get "outputType" | default $commandType }}
+{{ $outputOptions := .Get "outputOptions" | default $commandOptions }}
+
+<div class="code-block cli-block">
+  {{ if $command }}
+    <div class="code-copy">
+      <a class="code-copy-anchor" onclick="copyToClipboard(this)">
+        <span class="code-lang">{{ $commandType }} {{ if $ident }}<span class="ident-{{ if $identDanger }}danger{{else}}normal{{end}}">{{ $ident }}</span>{{end}}</span>
+        <img class="code-copy-icon img-invertible depend-js" src="/img/copy.svg" alt="Copy command" />
+      </a>
+    </div>
+    {{ transform.Highlight $command $commandType $commandOptions }}
+  {{ end }}
+  {{ with .Inner }}
+  <span class="monospace cli-output">
+    {{ . | markdownify }}
+  </span>
+  {{ end }}
+</div>

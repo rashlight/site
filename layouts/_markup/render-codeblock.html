@@ -1,9 +1,15 @@
 <div class="code-block">
+  {{ $inferedType := .Type }}
+  {{ if .Type }}
   <div class="code-copy">
     <a class="code-copy-anchor" onclick="copyToClipboard(this)">
       <span class="code-lang">{{ .Type }}</span>
       <img class="code-copy-icon img-invertible depend-js" src="/img/copy.svg" alt="Copy to clipboard" />
     </a>
+    {{ if eq $inferedType "plaintext" }}
+      {{ $inferedType = "" }} {{/* Prevent Chroma styling */}}
+    {{ end }}
   </div>
-  {{ transform.Highlight .Inner .Type .Options }}
+  {{ end }}
+  {{ transform.Highlight .Inner $inferedType .Options }}
 </div>

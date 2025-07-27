@@ -7,13 +7,15 @@
 {{ end }}
 
 {{ if and .defer .async }}
-  {{ warnidf "warn-js-fetch-type" "One or more Javascript tags have defer and async at the same time." }}
+  {{ warnidf "warn-js-defer-async" "One or more Javascript tags have defer and async at the same time. async will be used." }}
+{{ end }}
+
+{{ if .async }}
+  {{ $targetJs := $scratchJs.Get "scriptJs" }}
+  <script async src="{{ $targetJs.RelPermalink }}"></script>
 {{ else if .defer }}
   {{ $targetJs := $scratchJs.Get "scriptJs" }}
   <script defer src="{{ $targetJs.RelPermalink }}"></script>
-{{ else if .async }}
-  {{ $targetJs := $scratchJs.Get "scriptJs" }}
-  <script async src="{{ $targetJs.RelPermalink }}"></script>
 {{ else }} {{/* render-blocking */}}
   {{ $targetJs := $scratchJs.Get "scriptJs" }}
   <script src="{{ $targetJs.RelPermalink }}"></script>

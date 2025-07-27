@@ -1,0 +1,5 @@
+{{ $key := .Get 0 }}
+{{ $value := .Get 1 }}
+{{ $current_dict := .Page.Scratch.Get "pageSpecificVariables" | default dict }}
+{{ $new_dict := merge $current_dict (dict $key $value) }}
+{{ .Page.Scratch.Set "pageSpecificVariables" $new_dict }}

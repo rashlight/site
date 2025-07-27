@@ -64,6 +64,16 @@
   flex-direction: column;
 }
 
+/* Pico CSS override options */
+:root,
+:host {
+  --pico-font-family-sans-serif: "Nunito Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, Arial, "Helvetica Neue",
+    system-ui, sans-serif;
+  --pico-font-family-monospace: SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", ui-monospace, monospace;
+}
+
+/* Main */
+
 html {
   scroll-behavior: smooth;
 }
@@ -118,6 +128,10 @@ table {
 
 code {
   color: unset;
+}
+
+.monospace {
+  font-family: var(--pico-font-family-monospace);
 }
 
 .no-underline {
@@ -208,7 +222,7 @@ code {
       height: 100vh;
       height: 100dvh;
       background-color: rgba(0, 0, 0, 0.5);
-      z-index: -1; // behind the summary, but not main content
+      z-index: -1; // behind <summary>, but not <main>
       cursor: default;
     }
 
@@ -363,15 +377,6 @@ code {
   justify-content: center;
   font-size: large;
   margin-top: var(--pico-typography-spacing-vertical);
-}
-
-/* Pico CSS override options */
-
-:root,
-:host {
-  --pico-font-family-sans-serif: "Nunito Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, Arial, "Helvetica Neue",
-    system-ui, sans-serif;
-  --pico-font-family-monospace: SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", ui-monospace, monospace;
 }
 
 /* Mobile responsive */
