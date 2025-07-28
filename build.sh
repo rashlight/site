@@ -7,7 +7,7 @@ main() {
   echo "Installing Dart Sass v${DART_SASS_VERSION}..."
   curl -LJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
   tar -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
-  cp -r dart-sass/ /opt
+  cp -r dart-sass/ /opt/buildhome
   rm -rf dart-sass*
 
   # Hugo x64
@@ -18,7 +18,7 @@ main() {
   rm LICENSE README.md hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz
 
   echo "Setting the PATH environment variable..."
-  export PATH=/opt/dart-sass:$PATH
+  export PATH=/opt/buildhome:/opt/buildhome/dart-sass:$PATH
 
   echo "Configuring git..."
   # https://gohugo.io/methods/page/gitinfo/#hosting-considerations
