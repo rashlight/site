@@ -12,10 +12,10 @@
 
 {{ if .async }}
   {{ $targetJs := $scratchJs.Get "scriptJs" }}
-  <script async src="{{ $targetJs.RelPermalink }}"></script>
+  <script src="{{ $targetJs.RelPermalink }}" async></script>
 {{ else if .defer }}
   {{ $targetJs := $scratchJs.Get "scriptJs" }}
-  <script defer src="{{ $targetJs.RelPermalink }}"></script>
+  <script src="{{ $targetJs.RelPermalink }}" defer></script>
 {{ else }} {{/* render-blocking */}}
   {{ $targetJs := $scratchJs.Get "scriptJs" }}
   <script src="{{ $targetJs.RelPermalink }}"></script>
