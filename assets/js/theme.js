@@ -14,9 +14,4 @@
     doc.documentElement.dataset.theme = themeName;
     changeThemeIcons();
   };
-
-  window.addEventListener("beforeunload", function () {
-    console.log('bruh')
-    doc.body.classList.add("fadeout");
-  });
 })();
