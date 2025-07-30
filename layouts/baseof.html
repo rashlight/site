@@ -18,6 +18,7 @@
       {{ block "nextprev" . }}{{ end }} {{/* Next / Previous link tags */}}
       {{ partial "opengraph.html" . }}
       <link rel="icon" href="/favicon.ico">
+      {{ hugo.Generator }}
     {{ end }}
     {{ partial "dartscss.html" (dict "path" "css/fonts.scss" "preloadStyle" true) }}
     {{/* Prevent FOUC theme flashing */}}
@@ -30,8 +31,8 @@
     {{ block "stylesheets" . }} {{/* CSS goes here */}}
       {{ partial "dartscss.html" (dict "path" "css/single.scss") }}
     {{ end }}
-    {{ partial "scriptjs" (dict "path" "js/theme.js" "defer" true) }}
-    {{ block "scripts" . }}{{ end }} {{/* JS goes here */}}
+    {{ block "scripts" . }} {{/* JS goes here */}}
+    {{ end }}
     {{ if .Params.math }} {{/* add math: true in page frontmatter or config */}}
       {{ partial "scriptjs" (dict "path" "js/math.js" "defer" true) }}
       <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" integrity="sha384-KKWa9jJ1MZvssLeOoXG6FiOAZfAgmzsIIfw8BXwI9+kYm0lPCbC6yTQPBC00F1/L" crossorigin="anonymous"></script>

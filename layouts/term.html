@@ -6,6 +6,10 @@
   {{ partial "dartscss" (dict "path" "css/list.scss") }} 
 {{ end }} 
 
+{{ define "scripts" }}
+  {{ partial "scriptjs" (dict "path" "js/theme.js" "defer" true) }}
+{{ end }}
+
 {{ define "body" }}
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
