@@ -12,11 +12,11 @@
       {{ if strings.HasPrefix $branchName "ref:" }}
         {{ $branchNamePath := (printf "%s%s" ".git/" ((index (split $branchName " ") 1) | chomp))}}
         {{ if fileExists $branchNamePath }}
-          {{ $branchHash = substr (readFile $branchNamePath) -8 }}
+          {{ $branchHash = substr (readFile $branchNamePath) 0 7 }}
         {{ end }}
       {{ else }}
         {{/* detached HEAD */}}
-        {{ $branchHash = substr $branchName -8 }}
+        {{ $branchHash = substr $branchName 0 7 }}
       {{ end }}
     {{ end }}
 
