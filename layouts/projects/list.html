@@ -1,5 +1,9 @@
 {{ define "stylesheets" }}
-{{ partial "dartscss" (dict "path" "css/list-grid.scss") }}
+  {{ partial "dartscss" (dict "path" "css/list-grid.scss") }}
+{{ end }}
+
+{{ define "scripts" }}
+  {{ partial "scriptjs" (dict "path" "js/theme.js" "defer" true) }}
 {{ end }}
 
 {{ define "body" }}

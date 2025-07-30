@@ -1,4 +1,5 @@
 {{ define "scripts" }}
+  {{ partial "scriptjs" (dict "path" "js/theme.js" "defer" true) }}
   {{ partial "scriptjs" (dict "path" "js/clipboard.js" "defer" true) }}
 {{ end }}
 
