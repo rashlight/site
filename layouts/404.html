@@ -1,5 +1,5 @@
-{{ define "basesheets" }}
-{{ partial "dartscss.html" (dict "path" "css/404.scss") }}
+{{ define "storevars" }}
+  {{ .Store.Set "noDefaultBasesheet" true }}
 {{ end }}
 
 {{ define "metadata" }}
@@ -8,7 +8,7 @@
 {{ end }}
 
 {{ define "stylesheets" }}
-{{ partial "dartscss.html" (dict "path" "css/404.scss" "inlineCSS" true) }}
+  {{ partial "dartscss.html" (dict "path" "css/404.scss" "inlineCSS" true) }}
 {{ end }}
 
 {{ define "body" }}

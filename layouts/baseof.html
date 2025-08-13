@@ -26,7 +26,9 @@
       document.documentElement.dataset.theme = localStorage.getItem("theme") ?? (matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light")
     </script>
     {{ block "basesheets" . }} {{/* CSS Framework goes here */}}
-      {{ partial "dartscss.html" (dict "path" "css/base.scss") }} 
+      {{ if not (.Scratch.Get "noDefaultBasesheet") }}
+        {{ partial "dartscss.html" (dict "path" "css/base.scss") }} 
+      {{ end }}
     {{ end }}
     {{ block "stylesheets" . }} {{/* CSS goes here */}}
       {{ partial "dartscss.html" (dict "path" "css/single.scss") }}
